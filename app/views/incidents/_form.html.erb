@@ -1,0 +1,71 @@
+<div class='col-lg-6'>
+  <%= form_for @incident, html: { class: "form incident" }, multipart: true do |f| %>
+
+    <% if @incident.errors.any? %>
+      <div id="error_expl" class="panel panel-danger">
+        <div class="panel-heading">
+          <h3 class="panel-title"><%= pluralize(@incident.errors.count, "error") %> prohibited this incident from being saved:</h3>
+        </div>
+        <div class="panel-body">
+          <ul>
+          <% @incident.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+          </ul>
+        </div>
+      </div>
+    <% end %>
+    <div class="form-group">
+      <div>
+        <%= @incident.school_name %>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.label :description, 'Describe Issue/Incident' %>
+      <%= f.text_area :description, class: 'form-control', rows: 5 %>
+      <%=f.error_span(:description) %>
+    </div>
+    <% if detailed %>
+      <div class="form-group">
+        <%= f.label :incident_type_id %>
+        <%= f.select :incident_type_id, Incident.incident_types.keys, class: 'form-control', multiple: true %>
+        <%=f.error_span(:incident_type) %>
+      </div>
+      <div class="form-group">
+        <%= f.label :user_id %>
+        <%= f.text_field :user_id, class: 'form-control' %>
+        <%=f.error_span(:user_id) %>
+      </div>
+      <div class="form-group">
+        <%= f.label :people_involved %>
+        <%= f.text_area :people_involved, class: 'form-control' %>
+        <%=f.error_span(:people_involved) %>
+      </div>
+      <div class="form-group">
+        <%= f.label :other_observers %>
+          <%= f.text_area :other_observers, class: 'form-control' %>
+        <%=f.error_span(:other_observers) %>
+      </div>
+      <div class="form-group">
+        <%= f.label :date_time %>
+          <%= f.text_field :date_time, class: 'form-control' %>
+        <%=f.error_span(:date_time) %>
+      </div>
+      <div class="form-group">
+        <%= f.label :location %>
+          <%= f.text_field :location, class: 'form-control' %>
+        <%=f.error_span(:location) %>
+      </div>
+    <% end %>
+
+    <div class="form-group">
+      <div>
+        <%= f.submit 'Submit', :class => 'btn btn-primary' %>
+      </div>
+      <div>
+        <%= link_to('Or Submit Detailed Report', new_incident_path(detailed: true)) unless detailed %>
+      </div>
+    </div>
+
+  <% end %>
+</div>

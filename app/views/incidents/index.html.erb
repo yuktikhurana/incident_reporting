@@ -1,0 +1,52 @@
+<%- model_class = Incident -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:school_id) %></th>
+      <th><%= model_class.human_attribute_name(:description) %></th>
+      <th><%= model_class.human_attribute_name(:incident_type) %></th>
+      <th><%= model_class.human_attribute_name(:user_id) %></th>
+      <th><%= model_class.human_attribute_name(:people_involved) %></th>
+      <th><%= model_class.human_attribute_name(:other_observers) %></th>
+      <th><%= model_class.human_attribute_name(:date_time) %></th>
+      <th><%= model_class.human_attribute_name(:location) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @incidents.each do |incident| %>
+      <tr>
+        <td><%= link_to incident.id, incident_path(incident) %></td>
+        <td><%= incident.school_id %></td>
+        <td><%= incident.description %></td>
+        <td><%= incident.incident_type %></td>
+        <td><%= incident.user_id %></td>
+        <td><%= incident.people_involved %></td>
+        <td><%= incident.other_observers %></td>
+        <td><%= incident.date_time %></td>
+        <td><%= incident.location %></td>
+        <td><%=l incident.created_at %></td>
+        <td>
+          <%= link_to t('.show', :default => t("helpers.links.show")),
+                      incident_path(incident), :class => 'btn btn-default btn-xs' %>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_incident_path(incident), :class => 'btn btn-default btn-xs' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      incident_path(incident),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-xs btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_incident_path,
+            :class => 'btn btn-primary' %>

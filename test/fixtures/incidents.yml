@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  school: one
+  description: MyText
+  incident_type: 1
+  user: one
+  people_involved: MyText
+  other_observers: MyText
+  date_time: MyString
+  location: MyString
+
+two:
+  school: two
+  description: MyText
+  incident_type: 1
+  user: two
+  people_involved: MyText
+  other_observers: MyText
+  date_time: MyString
+  location: MyString
